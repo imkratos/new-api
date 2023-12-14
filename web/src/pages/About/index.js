@@ -39,16 +39,6 @@ const About = () => {
               <h3>关于</h3>
             </Layout.Header>
             <Layout.Content>
-              <p>
-                可在设置页面设置关于内容，支持 HTML & Markdown
-              </p>
-              new-api项目仓库地址：
-              <a href='https://github.com/Calcium-Ion/new-api'>
-                https://github.com/Calcium-Ion/new-api
-              </a>
-              <p>
-                
-              </p>
             </Layout.Content>
           </Layout>
         </> : <>
