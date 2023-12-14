@@ -31,34 +31,6 @@ const Footer = () => {
   return (
     <Layout>
       <Layout.Content style={{textAlign: 'center'}}>
-        {footer ? (
-          <div
-            className='custom-footer'
-            dangerouslySetInnerHTML={{ __html: footer }}
-          ></div>
-        ) : (
-          <div className='custom-footer'>
-            <a
-              href='https://github.com/Calcium-Ion/new-api'
-              target='_blank'
-            >
-              New API {process.env.REACT_APP_VERSION}{' '}
-            </a>
-            由{' '}
-            <a href='https://github.com/Calcium-Ion' target='_blank'>
-              Calcium-Ion
-            </a>{' '}
-            开发，基于{' '}
-            <a href='https://github.com/songquanpeng/one-api' target='_blank'>
-              One API v0.5.4
-            </a>{' '}
-            ，本项目根据{' '}
-            <a href='https://opensource.org/licenses/mit-license.php'>
-              MIT 许可证
-            </a>{' '}
-            授权
-          </div>
-        )}
       </Layout.Content>
     </Layout>
   );
