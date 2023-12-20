@@ -19,9 +19,9 @@ type Message struct {
 }
 
 type MediaMessage struct {
-	Type     string          `json:"type"`
-	Text     string          `json:"text"`
-	ImageUrl MessageImageUrl `json:"image_url,omitempty"`
+	Type     string `json:"type"`
+	Text     string `json:"text"`
+	ImageUrl any    `json:"image_url,omitempty"`
 }
 
 type MessageImageUrl struct {
@@ -53,7 +53,7 @@ type GeneralOpenAIRequest struct {
 	Messages    []Message `json:"messages,omitempty"`
 	Prompt      any       `json:"prompt,omitempty"`
 	Stream      bool      `json:"stream,omitempty"`
-	MaxTokens   int       `json:"max_tokens,omitempty"`
+	MaxTokens   uint      `json:"max_tokens,omitempty"`
 	Temperature float64   `json:"temperature,omitempty"`
 	TopP        float64   `json:"top_p,omitempty"`
 	N           int       `json:"n,omitempty"`
@@ -91,14 +91,14 @@ type AudioRequest struct {
 type ChatRequest struct {
 	Model     string    `json:"model"`
 	Messages  []Message `json:"messages"`
-	MaxTokens int       `json:"max_tokens"`
+	MaxTokens uint      `json:"max_tokens"`
 }
 
 type TextRequest struct {
 	Model     string    `json:"model"`
 	Messages  []Message `json:"messages"`
 	Prompt    string    `json:"prompt"`
-	MaxTokens int       `json:"max_tokens"`
+	MaxTokens uint      `json:"max_tokens"`
 	//Stream   bool      `json:"stream"`
 }
 
