@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {Input, Label, Message, Popup} from 'semantic-ui-react';
-import {Link} from 'react-router-dom';
 import {
     API,
     isMobile,
@@ -389,23 +387,15 @@ const ChannelsTable = () => {
                 return <Tag size='large' color='green'>已启用</Tag>;
             case 2:
                 return (
-                    <Popup
-                        trigger={<Tag size='large' color='red'>
-                            已禁用
-                        </Tag>}
-                        content='本渠道被手动禁用'
-                        basic
-                    />
+                    <Tag size='large' color='yellow'>
+                        已禁用
+                    </Tag>
                 );
             case 3:
                 return (
-                    <Popup
-                        trigger={<Tag size='large' color='yellow'>
-                            已禁用
-                        </Tag>}
-                        content='本渠道被程序自动禁用'
-                        basic
-                    />
+                    <Tag size='large' color='yellow'>
+                        自动禁用
+                    </Tag>
                 );
             default:
                 return (
@@ -531,6 +521,17 @@ const ChannelsTable = () => {
         setLoading(false);
     }
 
+    const fixChannelsAbilities = async () => {
+        const res = await API.post(`/api/channel/fix`);
+        const {success, message, data} = res.data;
+        if (success) {
+            showSuccess(`已修复 ${data} 个通道！`);
+            await refresh();
+        } else {
+            showError(message);
+        }
+    }
+
     const sortChannel = (key) => {
         if (channels.length === 0) return;
         setLoading(true);
@@ -646,7 +647,7 @@ const ChannelsTable = () => {
                 </Space>
             </div>
 
-            <Table columns={columns} dataSource={pageData} pagination={{
+            <Table style={{marginTop: 15}} columns={columns} dataSource={pageData} pagination={{
                 currentPage: activePage,
                 pageSize: pageSize,
                 total: channelCount,
@@ -721,6 +722,15 @@ const ChannelsTable = () => {
                         position={'top'}
                     >
                         <Button disabled={!enableBatchDelete} theme='light' type='danger' style={{marginRight: 8}}>删除所选通道</Button>
+                    </Popconfirm>
+                    <Popconfirm
+                        title="确定是否要修复数据库一致性？"
+                        content="进行该操作时，可能导致渠道访问错误，请仅在数据库出现问题时使用"
+                        okType={'warning'}
+                        onConfirm={fixChannelsAbilities}
+                        position={'top'}
+                    >
+                        <Button theme='light' type='secondary' style={{marginRight: 8}}>修复数据库一致性</Button>
                     </Popconfirm>
                 </Space>
             </div>

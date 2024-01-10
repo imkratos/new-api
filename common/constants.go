@@ -24,6 +24,9 @@ var ChatLink = ""
 var QuotaPerUnit = 500 * 1000.0 // $0.002 / 1K tokens
 var DisplayInCurrencyEnabled = true
 var DisplayTokenStatEnabled = true
+var DrawingEnabled = true
+var DataExportEnabled = true
+var DataExportInterval = 5 // unit: minute
 
 // Any options with "Secret", "Token" in its key won't be return by GetOptions
 
@@ -100,6 +103,8 @@ var BatchUpdateEnabled = false
 var BatchUpdateInterval = GetOrDefault("BATCH_UPDATE_INTERVAL", 5)
 
 var RelayTimeout = GetOrDefault("RELAY_TIMEOUT", 0) // unit is second
+
+var GeminiSafetySetting = GetOrDefaultString("GEMINI_SAFETY_SETTING", "BLOCK_NONE")
 
 const (
 	RequestIdKey = "X-Oneapi-Request-Id"
